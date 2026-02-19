@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { useState } from 'react';
 import { ManagePageSkeleton } from '@/components/Skeletons';
+import { Tags as TagsIcon } from 'lucide-react';
 
 export default function TagsDashboard() {
     const { user } = useAuth();
@@ -58,11 +59,24 @@ export default function TagsDashboard() {
 
     return (
         <div className="space-y-6">
-            <div className="flex justify-between items-center">
-                <h1 className="text-3xl font-bold">Manage Tags</h1>
-                 <Button onClick={() => setIsCreating(!isCreating)}>
-                     {isCreating ? 'Cancel' : 'Add New Tag'}
-                 </Button>
+            {/* Gradient page header */}
+            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-fuchsia-600 p-6 text-white shadow-xl shadow-rose-300/30 dark:shadow-rose-900/40">
+                <div className="absolute -right-10 -top-10 w-48 h-48 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+                <div className="relative flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                        <div className="bg-white/20 p-2.5 rounded-xl"><TagsIcon size={20} /></div>
+                        <div>
+                            <h1 className="text-2xl font-extrabold tracking-tight">Manage Tags</h1>
+                            <p className="text-rose-100 text-sm mt-0.5">{tags?.length ?? 0} tags</p>
+                        </div>
+                    </div>
+                    <Button
+                        onClick={() => setIsCreating(!isCreating)}
+                        className="bg-white text-rose-700 hover:bg-rose-50 font-semibold shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-xl"
+                    >
+                        {isCreating ? 'Cancel' : 'Add New Tag'}
+                    </Button>
+                </div>
             </div>
 
             {isCreating && (
@@ -89,12 +103,12 @@ export default function TagsDashboard() {
                 </Card>
             )}
 
-            <div className="bg-white rounded-md border">
+            <div className="bg-white dark:bg-gray-950 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
                 <Table>
                     <TableHeader>
-                        <TableRow>
-                            <TableHead>Name</TableHead>
-                            <TableHead>Slug</TableHead>
+                        <TableRow className="bg-gradient-to-r from-gray-50 to-rose-50/40 dark:from-gray-800/60 dark:to-rose-950/20 border-b border-gray-100 dark:border-gray-800">
+                            <TableHead className="font-semibold text-gray-700 dark:text-gray-300">Name</TableHead>
+                            <TableHead className="font-semibold text-gray-700 dark:text-gray-300">Slug</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>

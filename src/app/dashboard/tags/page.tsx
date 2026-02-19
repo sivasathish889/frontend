@@ -17,6 +17,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { useState } from 'react';
+import { ManagePageSkeleton } from '@/components/Skeletons';
 
 export default function TagsDashboard() {
     const { user } = useAuth();
@@ -52,7 +53,7 @@ export default function TagsDashboard() {
         createTagMutation.mutate({ name });
     };
 
-    if (isLoading) return <div>Loading tags...</div>;
+    if (isLoading) return <ManagePageSkeleton cols={2} />;
     if (user?.role !== 'admin') return <div className="text-red-500">Access Denied</div>;
 
     return (

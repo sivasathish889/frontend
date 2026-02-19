@@ -11,6 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { toast } from 'sonner';
+import { PostFormSkeleton } from '@/components/Skeletons';
 
 export default function EditPostPage() {
     const router = useRouter();
@@ -95,7 +96,7 @@ export default function EditPostPage() {
         updatePostMutation.mutate(formData);
     };
     
-    if (isPostLoading) return <div>Loading post...</div>;
+    if (isPostLoading) return <PostFormSkeleton />;
 
     return (
         <div className="max-w-2xl mx-auto py-8">

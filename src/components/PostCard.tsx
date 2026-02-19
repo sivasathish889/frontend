@@ -21,7 +21,7 @@ export function PostCard({ post }: { post: Post }) {
     const imageUrl = getImageUrl(post.image);
 
     return (
-        <Card className="h-full flex flex-col hover:shadow-lg transition-shadow duration-300 border-gray-200 dark:border-gray-800 bg-white/50 backdrop-blur-sm">
+        <Card className="h-full flex flex-col hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-900 shadow-sm overflow-hidden group">
             <div className="h-48 bg-gray-100 dark:bg-gray-800 rounded-t-lg flex items-center justify-center text-gray-400 overflow-hidden relative group">
                 {imageUrl ? (
                     <img 

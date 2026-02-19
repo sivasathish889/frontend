@@ -9,20 +9,13 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import api from '@/lib/api';
 import Link from 'next/link';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+
 
 
 export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [role, setRole] = useState('user');
     const { login } = useAuth();
     const [loading, setLoading] = useState(false);
 
@@ -30,7 +23,7 @@ export default function RegisterPage() {
         e.preventDefault();
         setLoading(true);
         try {
-            const { data } = await api.post('/auth/register', { name, email, password, role });
+            const { data } = await api.post('/auth/register', { name, email, password });
             login(data.token, data);
             toast.success('Account created successfully');
         } catch (error: any) {
@@ -80,20 +73,7 @@ export default function RegisterPage() {
                                 required
                             />
                         </div>
-                        {/* Note: I need to install Select component for Role selection, or simpler input for now */}
-                        {/* For simplicity I will just hardcode 'user' or use simple select if component missing */}
-                         <div className="space-y-2">
-                            <Label htmlFor="role">Role (For Demo)</Label>
-                            <select 
-                                className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
-                                value={role}
-                                onChange={(e) => setRole(e.target.value)}
-                            >
-                                <option value="user">User</option>
-                                <option value="editor">Editor</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
+
 
                         <Button type="submit" className="w-full" disabled={loading}>
                             {loading ? 'Registering...' : 'Register'}

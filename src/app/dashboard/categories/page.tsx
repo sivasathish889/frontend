@@ -18,6 +18,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { Trash2 } from 'lucide-react';
 import { useState } from 'react';
+import { ManagePageSkeleton } from '@/components/Skeletons';
 
 export default function CategoriesDashboard() {
     const { user } = useAuth();
@@ -58,7 +59,7 @@ export default function CategoriesDashboard() {
         createCategoryMutation.mutate({ name, description });
     };
 
-    if (isLoading) return <div>Loading categories...</div>;
+    if (isLoading) return <ManagePageSkeleton cols={3} />;
     if (user?.role !== 'admin') return <div className="text-red-500">Access Denied</div>;
 
     return (

@@ -16,6 +16,7 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { toast } from 'sonner';
 import { Pencil, Trash2 } from 'lucide-react';
+import { ManagePageSkeleton } from '@/components/Skeletons';
 
 export default function PostsDashboard() {
     const { user } = useAuth();
@@ -46,7 +47,7 @@ export default function PostsDashboard() {
         }
     });
 
-    if (isLoading) return <div>Loading posts...</div>;
+    if (isLoading) return <ManagePageSkeleton cols={6} />;
 
     return (
         <div className="space-y-6">

@@ -4,9 +4,9 @@ import { useAuth } from '@/context/AuthContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
 import { useQuery } from '@tanstack/react-query';
 import api from '@/lib/api';
+import { DashboardOverviewSkeleton } from '@/components/Skeletons';
 
 function AdminAnalytics() {
     const { data } = useQuery({
@@ -52,7 +52,7 @@ function AdminAnalytics() {
 export default function DashboardPage() {
     const { user, loading } = useAuth();
     
-    if (loading) return <div>Loading...</div>;
+    if (loading) return <DashboardOverviewSkeleton />;
     if (!user) return null;
 
     return (

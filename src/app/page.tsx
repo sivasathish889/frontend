@@ -10,7 +10,8 @@ import { Badge } from '@/components/ui/badge';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { Search, Filter, TrendingUp, Sparkles, BookOpen } from 'lucide-react';
-import { cn } from '@/lib/utils'; // Assuming cn exists
+import { cn } from '@/lib/utils';
+import { PostGridSkeleton } from '@/components/Skeletons';
 
 export default function Home() {
     const { user, logout } = useAuth();
@@ -187,11 +188,7 @@ export default function Home() {
                     </div>
                     
                     {isLoading ? (
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                             {[1, 2, 3, 4, 5, 6].map((i) => (
-                                <div key={i} className="h-[400px] bg-gray-100 dark:bg-gray-800 rounded-xl animate-pulse"></div>
-                             ))}
-                        </div>
+                        <PostGridSkeleton count={6} />
                     ) : error ? (
                         <div className="text-center py-20 bg-red-50 rounded-2xl border border-red-100">
                              <p className="text-red-500 font-medium">Error loading posts. Please try again later.</p>
